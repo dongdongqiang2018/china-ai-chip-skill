@@ -1,0 +1,26 @@
+{
+  "name": "china-ai-chip-skill",
+  "version": "1.0.0",
+  "description": "国产GPU芯片 Agent Skills 集合 - 沐曦(Metax)、昇腾(Ascend)等",
+  "main": "index.js",
+  "scripts": {
+    "validate": "python scripts/validate_skills.py",
+    "add": "node scripts/add-skill.js"
+  },
+  "keywords": [
+    "ai-chip",
+    "gpu",
+    "metax",
+    "muxi",
+    "ascend",
+    "huawei",
+    "skill",
+    "agent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ascend-ai-coding/china-ai-chip-skill"
+  },
+  "author": "",
+  "license": "MIT"
+}
