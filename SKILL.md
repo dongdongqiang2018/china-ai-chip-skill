@@ -99,6 +99,21 @@ cluster-inspect
 | [mx-cluster-inspector](MUXI/skills/mx-cluster-inspector/) | 集群自动化巡检 |
 | [mx-pd-deploy](MUXI/skills/mx-pd-deploy/) | PD分离推理部署 |
 
+### 壁仞 (BIREN)
+
+- **产品系列**: BIRENSUPA 系列
+- **官方工具**: brsmi, suDCGM, brsw
+- **SDK**: BIRENSUPA SDK
+- **Skills 目录**: [BIREN/skills/](BIREN/skills/)
+
+| Skill | 功能说明 |
+|-------|----------|
+| [brsmi](BIREN/skills/brsmi/) | GPU设备管理，实时监控 |
+| [biren-sdk](BIREN/skills/biren-sdk/) | BIRENSUPA SDK安装配置 |
+| [succl](BIREN/skills/succl/) | suCCL通信库配置与测试 |
+| [biren-container](BIREN/skills/biren-container/) | 容器工具包安装配置 |
+| [sudcGM](BIREN/skills/sudcGM/) | 数据中心GPU监控 |
+
 ### 昇腾 (Ascend)
 
 - **产品系列**: 910A, 910B, 310P
@@ -126,6 +141,14 @@ china-ai-chip-skill/
 │       ├── mx-cu-bridge/
 │       ├── mx-cluster-inspector/
 │       └── mx-pd-deploy/
+├── BIREN/                       # 壁仞 Skills
+│   ├── BIREN.md
+│   └── skills/
+│       ├── brsmi/
+│       ├── biren-sdk/
+│       ├── succl/
+│       ├── biren-container/
+│       └── sudcGM/
 └── ASCEND/                    # 昇腾 Skills *(规划中)*
     ├── ASCEND.md
     └── skills/
