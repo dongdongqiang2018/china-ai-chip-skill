@@ -1,0 +1,86 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [main, 'feat/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate SKILL.md files
+        run: |
+          python3 scripts/validate_skills.py
+
+      - name: Check frontmatter
+        run: |
+          echo "=== Checking all SKILL.md files have valid frontmatter ==="
+          find . -name "SKILL.md" | while read f; do
+            echo "Checking: $f"
+            # Check YAML frontmatter exists
+            if ! head -1 "$f" | grep -q "^---$"; then
+              echo "ERROR: Missing opening --- in $f"
+              exit 1
+            fi
+            # Check name field exists
+            if ! grep -q "^name:" "$f"; then
+              echo "ERROR: Missing 'name:' field in $f"
+              exit 1
+            fi
+            # Check description field exists
+            if ! grep -q "^description:" "$f"; then
+              echo "ERROR: Missing 'description:' field in $f"
+              exit 1
+            fi
+          done
+          echo "All SKILL.md files have valid frontmatter!"
+
+      - name: Verify skill names match directory names
+        run: |
+          echo "=== Verifying skill names match directory names ==="
+          find . -name "SKILL.md" | while read f; do
+            dir=$(dirname "$f")
+            name=$(grep "^name:" "$f" | cut -d: -f2 | tr -d ' ')
+            expected=$(basename "$dir")
+            
+            # For nested skills, name can be either:
+            # 1. Exact match with directory name (e.g., "basic" for "basic/")
+            # 2. Hyphenated path ending with directory name (e.g., "npu-smi-info-basic" for "npu-smi-info/basic/")
+            # This allows both naming conventions for flexibility
+            
+            # Check if name ends with expected directory name (with hyphen prefix or exact match)
+            if [ "$name" = "$expected" ]; then
+              echo "OK: $dir -> name: $name (exact match)"
+            elif [ "$name" = "${name%-*}-$expected" ] || [[ "$name" == *-"$expected" ]]; then
+              echo "OK: $dir -> name: $name (hyphenated, ends with directory name)"
+            else
+              echo "ERROR: Directory '$dir' has name='$name' but expected to end with '$expected'"
+              exit 1
+            fi
+          done
+          echo "All skill names match their directory names!"
+
+      - name: Check for broken internal links
+        run: |
+          echo "=== Checking for broken internal links ==="
+          find . -name "SKILL.md" | while read f; do
+            dir=$(dirname "$f")
+            # Extract relative links like [text](../path/)
+            grep -oE '\]\([^)]+\.md\)' "$f" | tr -d '[]()' | while read link; do
+              # Resolve relative path
+              target="$dir/$link"
+              if [ ! -f "$target" ]; then
+                echo "WARNING: Broken link in $f -> $link (target: $target)"
+              fi
+            done
+          done
+          echo "Link check complete!"
