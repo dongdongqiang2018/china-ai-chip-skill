@@ -2,6 +2,11 @@
 
 国产AI芯片FAE辅助Skills集合，帮助FAE工程师快速掌握各类国产AI芯片的使用方法。
 
+## 项目统计
+
+- **总Skills数量**: 84+ 个
+- **支持厂商**: 沐曦(MetaX)、华为昇腾(Ascend)、壁仞科技(Biren)
+
 ## 项目简介
 
 本项目收集和整理了国产AI芯片厂商的技术文档和使用指南，以Skills的形式组织，方便快速查询和使用。
@@ -11,14 +16,15 @@
 ```
 china-ai-chip-skill/
 ├── README.md                      # 本文档
-├── fae-skill-generator/          # FAE Skill生成指南
-├── device-detector/              # GPU设备识别
-├── MUXI/                         # 沐曦(MetaX) Skills
-│   ├── mx-smi/                   # GPU管理工具
-│   ├── mxvs/                     # 验收测试套件
-│   └── mccl-test/                # 集合通信库
-├── Ascend/                       # 华为昇腾Skills (Forked)
-└── BIREN/                        # 壁仞科技Skills (待添加)
+├── fae-skill-generator/           # FAE Skill生成指南
+├── device-detector/               # GPU设备识别
+├── MUXI/                          # 沐曦(MetaX) Skills (33个)
+│   ├── mx-smi/                    # GPU管理工具
+│   ├── mxvs/                      # 验收测试套件
+│   ├── mccl-test/                 # 集合通信库
+│   └── ...                        # 更多技能
+├── Ascend/                        # 华为昇腾Skills (28个) (Forked)
+└── BIREN/                         # 壁仞科技Skills (23个)
 ```
 
 ## Skills说明
@@ -31,11 +37,13 @@ china-ai-chip-skill/
 
 - **[fae-skill-generator](./fae-skill-generator/)**: 从技术文档生成FAE Skills的指南
 
-### 沐曦 (MetaX)
+### 沐曦 (MetaX) ⚡
 
 - **[mx-smi](./MUXI/mx-smi/)**: GPU状态查询、功耗管理、固件升级等
 - **[mxvs](./MUXI/mxvs/)**: 硬件验收测试、PCIe/显存带宽测试、眼图测试
 - **[mccl-test](./MUXI/mccl-test/)**: 集合通信库编程指南
+
+包含 **33个** Skills，覆盖驱动、运行时、推理、训练、工具链等全栈技术。
 
 ### 华为昇腾 (Ascend) ⚡
 
@@ -43,7 +51,7 @@ china-ai-chip-skill/
 
 - **[Ascend Skills](./Ascend/)**: 昇腾AI处理器Skills集合
 
-包含的主要Skills：
+包含 **28个** Skills，主要包括：
 
 | 目录 | 说明 |
 |------|------|
@@ -56,9 +64,22 @@ china-ai-chip-skill/
 | `vllm-ascend` | vLLM推理框架 |
 | `ai-for-science` | AI for Science模型适配 |
 
-### 壁仞科技 (Biren)
+### 壁仞科技 (Biren) ⚡
 
-- **[BIREN占位符](./BIREN/)**: 壁仞Skills待添加
+- **[BIREN Skills](./BIREN/)**: 壁仞AI芯片Skills集合
+
+包含 **23个** Skills，覆盖驱动、Runtime、推理、训练、工具链等：
+
+| 目录 | 说明 |
+|------|------|
+| `biren-driver` | 驱动安装与配置 |
+| `biren-brsmi` | 设备状态监控 |
+| `biren-sdk` | SDK安装与环境配置 |
+| `biren-sudnn` | 深度学习算子库 |
+| `biren-suinfer` | 推理引擎 |
+| `biren-brvllm` | vLLM推理框架 |
+| `biren-sublas` | 加速库 |
+| `biren-suprof` | 性能分析工具 |
 
 ## 快速开始
 
@@ -129,6 +150,9 @@ MIT License
 
 ## 更新日志
 
+- **2025-04-03**: 壁仞Biren Skills发布
+  - 添加23个壁仞科技Skills (biren-brsmi, biren-sdk, biren-sudnn等)
+  - 更新README结构，添加各厂商Skills统计
 - 2025-04: 初始版本
   - 添加device-detector技能
   - 添加沐曦(MUXI)三个基础Skills
